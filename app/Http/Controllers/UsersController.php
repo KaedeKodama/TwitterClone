@@ -62,5 +62,19 @@ public function followings($id)
         return view('users.followers', $data);
     }
 
+public function favoritings($id)
+    {
+        $user = User::find($id);
+        $favoritings = $user->favoritings()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'favoritings' => $favoritings,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.favoritings', $data);
+    }
 
 }
